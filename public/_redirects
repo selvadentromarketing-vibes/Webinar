@@ -1,0 +1,6 @@
+# Force HTTPS
+http://webinar.selvadentrotulum.com/*  https://webinar.selvadentrotulum.com/:splat  301!
+http://selvadentrotulum.com/*          https://selvadentrotulum.com/:splat           301!
+
+# SPA routing
+/*    /index.html   200
