@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tulum Investors Webinar | Selvadentro</title>
+<meta name="description" content="Join our free Thursday webinar to discover why smart investors are buying jungle land in the Riviera Maya.">
+<meta property="og:title" content="Tulum Investors Webinar | Selvadentro">
+<meta property="og:description" content="Free 45-minute breakdown of Tulum land investing. Real numbers. Live every Thursday.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Facebook Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '680727997874671');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"/></noscript>
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --forest: #465241;
+    --forest-deep: #3a4536;
+    --forest-90: rgba(70, 82, 65, 0.9);
+    --olive: #65713F;
+    --copper: #CF8543;
+    --copper-hover: #b8743a;
+    --copper-10: rgba(207, 133, 67, 0.1);
+    --copper-15: rgba(207, 133, 67, 0.15);
+    --sand: #D9B37E;
+    --cream: #F5F0E8;
+    --cream-light: #FAF7F2;
+    --white: #ffffff;
+    --text-dark: #2a2a2a;
+    --text-mid: #555;
+    --text-light: #999;
+    --border-light: rgba(70, 82, 65, 0.08);
+    --border-mid: rgba(70, 82, 65, 0.12);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lexend', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ---- Accent bar ---- */
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--forest) 0%, var(--olive) 35%, var(--copper) 65%, var(--sand) 100%);
+  }
+
+  /* ---- Navigation ---- */
+  .nav {
+    background: var(--cream-light);
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo {
+    display: block;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  /* ---- Hero ---- */
+  .hero {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 56px 28px 72px;
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--copper);
+    background: var(--copper-10);
+    padding: 7px 14px;
+    border-radius: 3px;
+    margin-bottom: 20px;
+  }
+  .hero-badge .pulse {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--copper);
+    animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .hero h1 {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 700;
+    color: var(--forest);
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -0.3px;
+  }
+
+  .hero-intro {
+    font-size: 16px;
+    color: var(--text-mid);
+    margin-bottom: 32px;
+    font-weight: 300;
+    line-height: 1.75;
+    max-width: 500px;
+  }
+
+  .hero-points {
+    list-style: none;
+    margin-bottom: 36px;
+  }
+  .hero-points li {
+    position: relative;
+    padding: 14px 0 14px 32px;
+    font-size: 15px;
+    color: var(--text-dark);
+    font-weight: 400;
+    line-height: 1.55;
+    border-bottom: 1px solid var(--border-light);
+  }
+  .hero-points li:last-child { border-bottom: none; }
+  .hero-points li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 19px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--copper-15);
+  }
+  .hero-points li::after {
+    content: '';
+    position: absolute;
+    left: 4.5px;
+    top: 23.5px;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--copper);
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-mid);
+  }
+  .meta-item span {
+    display: block;
+    font-size: 14px;
+    color: var(--forest);
+    font-weight: 500;
+    margin-bottom: 1px;
+  }
+  .meta-item small {
+    font-size: 12px;
+    color: var(--text-light);
+    font-weight: 300;
+  }
+
+  /* ---- Form card ---- */
+  .form-card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 36px 32px 32px;
+    box-shadow:
+      0 1px 2px rgba(70,82,65,0.04),
+      0 8px 32px rgba(70,82,65,0.07);
+    border: 1px solid var(--border-light);
+    position: sticky;
+    top: 20px;
+  }
+
+  .form-date-banner {
+    background: var(--forest);
+    margin: -36px -32px 28px;
+    padding: 16px 32px;
+    border-radius: 8px 8px 0 0;
+    text-align: center;
+  }
+  .form-date-banner p {
+    font-size: 13px;
+    color: var(--sand);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+  }
+  .form-date-banner p strong {
+    color: var(--white);
+    font-weight: 500;
+  }
+  #next-date-banner {
+    display: block;
+    font-size: 18px;
+    color: var(--white);
+    font-weight: 500;
+    margin-top: 4px;
+    font-family: 'Cardo', Georgia, serif;
+  }
+
+  .form-card h2 {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 21px;
+    font-weight: 700;
+    color: var(--forest);
+    margin-bottom: 4px;
+  }
+  .form-sub {
+    font-size: 13px;
+    color: var(--text-light);
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+
+  .form-group {
+    margin-bottom: 14px;
+  }
+  .form-group label {
+    display: block;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 5px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--cream-light);
+    border: 1px solid var(--border-mid);
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus {
+    border-color: var(--copper);
+    box-shadow: 0 0 0 3px rgba(207, 133, 67, 0.08);
+  }
+  .form-group input::placeholder { color: #c0b8ab; font-weight: 300; }
+  .form-group select {
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L5 5L9 1' stroke='%23999' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 36px;
+  }
+  .form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-dark);
+    background: var(--cream-light);
+    border: 1px solid var(--border-mid);
+    border-radius: 5px;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    resize: vertical;
+    min-height: 60px;
+  }
+  .form-group textarea:focus {
+    border-color: var(--copper);
+    box-shadow: 0 0 0 3px rgba(207, 133, 67, 0.08);
+  }
+  .form-group textarea::placeholder { color: #c0b8ab; font-weight: 300; }
+
+  /* Radio group styling */
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .form-group label.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--cream-light);
+    border: 1px solid var(--border-mid);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-dark);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0;
+  }
+  .form-group label.radio-option:hover {
+    border-color: var(--copper);
+    background: var(--copper-10);
+  }
+  .radio-option input[type="radio"] {
+    -webkit-appearance: auto;
+    appearance: auto;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--copper);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .form-group label.radio-option.selected {
+    border-color: var(--copper);
+    background: var(--copper-10);
+  }
+
+  .form-divider {
+    height: 1px;
+    background: var(--border-mid);
+    margin: 18px 0;
+  }
+  .form-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+  .optional-tag {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-light);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-left: 4px;
+  }
+
+  /* Phone input with country code */
+  .phone-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+  .phone-wrapper select {
+    width: 100px;
+    flex-shrink: 0;
+    font-size: 13px;
+    padding-right: 28px;
+    background-position: right 8px center;
+  }
+  .phone-wrapper input {
+    flex: 1;
+  }
+
+  /* Phone validation */
+  .phone-valid { border-color: #22c55e !important; }
+  .phone-invalid { border-color: #ef4444 !important; }
+
+  .form-submit {
+    width: 100%;
+    padding: 14px;
+    font-family: 'Lexend', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--white);
+    background: var(--copper);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    margin-top: 6px;
+    letter-spacing: 0.2px;
+  }
+  .form-submit:hover { background: var(--copper-hover); }
+  .form-submit:active { transform: scale(0.99); }
+  .form-submit:disabled {
+    background: var(--sand);
+    cursor: not-allowed;
+  }
+
+  .form-footnote {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-light);
+    margin-top: 12px;
+    font-weight: 300;
+  }
+
+  .form-error {
+    display: none;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #991b1b;
+    font-size: 13px;
+    padding: 10px 14px;
+    border-radius: 5px;
+    margin-bottom: 14px;
+  }
+
+  /* ---- Incentive strip ---- */
+  .incentive {
+    background: var(--forest);
+    padding: 44px 28px;
+    text-align: center;
+  }
+  .incentive-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .incentive-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 14px;
+  }
+  .incentive h3 {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 22px;
+    color: var(--white);
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.35;
+  }
+  .incentive p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  /* ---- Footer ---- */
+  .footer {
+    background: var(--forest-deep);
+    padding: 28px;
+    text-align: center;
+  }
+  .footer-logo {
+    margin-bottom: 12px;
+  }
+  .footer-logo img {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+  .footer-links {
+    font-size: 11px;
+    color: rgba(255,255,255,0.3);
+  }
+  .footer-links a {
+    color: var(--sand);
+    text-decoration: none;
+  }
+
+  /* ---- Responsive ---- */
+  @media (max-width: 880px) {
+    .hero {
+      grid-template-columns: 1fr;
+      padding: 24px 20px 48px;
+      gap: 28px;
+    }
+    .hero > .form-card {
+      order: -1;
+      position: static;
+    }
+    .hero > div:first-child {
+      order: 1;
+    }
+    .hero-meta {
+      flex-wrap: wrap;
+      gap: 16px 28px;
+    }
+    .nav-logo img {
+      height: 32px;
+    }
+  }
+
+  /* ---- Animations ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-badge { animation: fadeUp 0.5s ease-out 0.05s both; }
+  .hero h1 { animation: fadeUp 0.5s ease-out 0.1s both; }
+  .hero-intro { animation: fadeUp 0.5s ease-out 0.15s both; }
+  .hero-points { animation: fadeUp 0.5s ease-out 0.2s both; }
+  .hero-meta { animation: fadeUp 0.5s ease-out 0.25s both; }
+  .form-card { animation: fadeUp 0.5s ease-out 0.15s both; }
+</style>
+</head>
+<body>
+
+<div class="accent-bar"></div>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://selvadentrotulum.com" class="nav-logo"><img src="logo.webp" alt="Selvadentro — tierra de cenotes"></a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div>
+    <div class="hero-badge">
+      <span class="pulse"></span>
+      Live every Thursday
+    </div>
+
+    <h1>Own a piece of Tulum's jungle before the world catches on</h1>
+
+    <p class="hero-intro">
+      Join us <strong id="next-date-inline">this Thursday</strong> for a 45-minute breakdown of the numbers, the legal process, and the specific area in the Riviera Maya where land prices haven't caught up yet.
+    </p>
+
+    <ul class="hero-points">
+      <li>Why the inland jungle corridor is outperforming coastal Tulum right now</li>
+      <li>Real lot prices, appreciation data, and projected ROI</li>
+      <li>How foreign buyers legally own land in Mexico (it's simpler than you think)</li>
+      <li>An exclusive offer for live attendees who stay until the end</li>
+    </ul>
+
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span>45 minutes</span>
+        <small>Presentation + live Q&A</small>
+      </div>
+      <div class="meta-item">
+        <span>Free</span>
+        <small>No obligation</small>
+      </div>
+      <div class="meta-item">
+        <span>Live only</span>
+        <small>No replay available</small>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-card">
+    <div class="form-date-banner">
+      <p>Next webinar</p>
+      <span id="next-date-banner">Loading...</span>
+    </div>
+
+    <h2>Reserve your spot</h2>
+    <p class="form-sub">Limited capacity. Your personal join link arrives instantly.</p>
+
+    <div class="form-error" id="form-error"></div>
+
+    <form id="webinar-form">
+      <!-- Hidden fields -->
+      <input type="hidden" name="utm_source" id="f-utm_source">
+      <input type="hidden" name="utm_medium" id="f-utm_medium">
+      <input type="hidden" name="utm_campaign" id="f-utm_campaign">
+      <input type="hidden" name="utm_content" id="f-utm_content">
+      <input type="hidden" name="utm_term" id="f-utm_term">
+      <input type="hidden" name="fb_ad_id" id="f-fb_ad_id">
+      <input type="hidden" name="webinar_date" id="f-webinar_date">
+
+      <div class="form-group">
+        <label for="first_name">First name</label>
+        <input type="text" id="first_name" name="first_name" placeholder="Your first name" required autocomplete="given-name">
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+      </div>
+
+      <div class="form-group">
+        <label for="phone">Phone / WhatsApp</label>
+        <div class="phone-wrapper">
+          <select id="phone-code" name="phone_country_code" required>
+            <option value="+1" selected>🇺🇸 +1</option>
+            <option value="+1CA">🇨🇦 +1</option>
+            <option value="+52">🇲🇽 +52</option>
+            <option value="+44">🇬🇧 +44</option>
+            <option value="+61">🇦🇺 +61</option>
+            <option value="+49">🇩🇪 +49</option>
+            <option value="+33">🇫🇷 +33</option>
+            <option value="+34">🇪🇸 +34</option>
+            <option value="+55">🇧🇷 +55</option>
+            <option value="+57">🇨🇴 +57</option>
+            <option value="+54">🇦🇷 +54</option>
+            <option value="+91">🇮🇳 +91</option>
+          </select>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="country">Country</label>
+        <select id="country" name="country" required>
+          <option value="" disabled selected>Select your country</option>
+          <option value="US">United States</option>
+          <option value="CA">Canada</option>
+          <option value="MX">Mexico</option>
+          <option value="GB">United Kingdom</option>
+          <option value="AU">Australia</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="ES">Spain</option>
+          <option value="BR">Brazil</option>
+          <option value="CO">Colombia</option>
+          <option value="AR">Argentina</option>
+          <option value="OTHER">Other</option>
+        </select>
+      </div>
+
+      <div class="form-divider"></div>
+      <p class="form-section-label">Quick questions</p>
+
+      <div class="form-group">
+        <label>Have you visited Tulum before?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="visited_tulum" value="Yes" required>
+            Yes
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="visited_tulum" value="No, but I'm planning to">
+            No, but I'm planning to
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>What's your timeline to invest?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Ready now (0-3 months)" required>
+            Ready now (0–3 months)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Soon (3-6 months)">
+            Soon (3–6 months)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Gathering info (6+ months)">
+            Gathering info (6+ months)
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="attracts">What attracts you most to Tulum? <span class="optional-tag">Optional</span></label>
+        <textarea id="attracts" name="attracts_to_tulum" placeholder="Nature, cenotes, culture, lifestyle, investment..." rows="2"></textarea>
+      </div>
+
+      <button type="submit" class="form-submit" id="submit-btn">Reserve my spot</button>
+      <p class="form-footnote">Free. 45 minutes. No replay.</p>
+    </form>
+  </div>
+</section>
+
+<section class="incentive">
+  <div class="incentive-inner">
+    <p class="incentive-label">Exclusive for live attendees</p>
+    <h3>Stay until the end for something we've never offered publicly</h3>
+    <p>We're releasing pre-sale pricing on select lots exclusively for webinar attendees who watch the full presentation. This pricing will not be available after the webinar ends.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-logo"><img src="logo.webp" alt="Selvadentro"></div>
+  <div class="footer-links"><a href="https://selvadentrotulum.com">selvadentrotulum.com</a></div>
+</footer>
+
+<script>
+(function() {
+  // ============================================================
+  // CONFIGURATION — Edit these values
+  // ============================================================
+  
+  // Your Make.com webhook URL (replace with your actual URL)
+  var WEBHOOK_URL = 'https://hook.us2.make.com/95ya7r7pkydqk6c54lo6sgitryik2118';
+  
+  // Webinar time: hour in 24h format, timezone offset from UTC
+  // 7:00 PM EST = 19, offset = -5
+  var WEBINAR_HOUR = 19;      // 7 PM
+  var WEBINAR_MINUTE = 0;
+  var TIMEZONE_LABEL = 'EST';  // Display label
+  var UTC_OFFSET = -5;         // EST = UTC-5
+  
+  // Day of week: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
+  var WEBINAR_DAY = 4;         // Thursday
+  
+  // Cutoff: if it's already webinar day and past this hour (local),
+  // roll to next week. Set to a few hours before webinar.
+  var CUTOFF_HOUR = 17;        // 5 PM on webinar day = roll to next week
+  
+  // Thank you page path
+  var THANK_YOU_PATH = '/thank-you.html';
+
+  // ============================================================
+  // ROLLING DATE CALCULATION
+  // ============================================================
+  
+  function getNextWebinarDate() {
+    var now = new Date();
+    
+    // Calculate based on the webinar's timezone
+    // Create a date in UTC that represents "now" in the webinar timezone
+    var localNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+    
+    var currentDay = localNow.getDay();
+    var currentHour = localNow.getHours();
+    
+    var daysUntil = WEBINAR_DAY - currentDay;
+    
+    if (daysUntil < 0) {
+      // Already past the webinar day this week
+      daysUntil += 7;
+    } else if (daysUntil === 0 && currentHour >= CUTOFF_HOUR) {
+      // It's webinar day but past cutoff — roll to next week
+      daysUntil = 7;
+    }
+    
+    var nextDate = new Date(localNow);
+    nextDate.setDate(nextDate.getDate() + daysUntil);
+    nextDate.setHours(WEBINAR_HOUR, WEBINAR_MINUTE, 0, 0);
+    
+    return nextDate;
+  }
+  
+  function formatDate(date) {
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var months = ['January','February','March','April','May','June',
+                  'July','August','September','October','November','December'];
+    
+    var dayName = days[date.getDay()];
+    var monthName = months[date.getMonth()];
+    var dayNum = date.getDate();
+    
+    var hours = date.getHours();
+    var ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    if (hours === 0) hours = 12;
+    
+    var minutes = date.getMinutes();
+    var minuteStr = minutes === 0 ? '' : ':' + (minutes < 10 ? '0' : '') + minutes;
+    
+    return {
+      full: dayName + ', ' + monthName + ' ' + dayNum + ' at ' + hours + minuteStr + ' ' + ampm + ' ' + TIMEZONE_LABEL,
+      short: dayName + ', ' + monthName + ' ' + dayNum,
+      banner: dayName + ', ' + monthName + ' ' + dayNum + ' — ' + hours + minuteStr + ' ' + ampm + ' ' + TIMEZONE_LABEL,
+      inline: 'this ' + dayName,
+      iso: date.getFullYear() + '-' + 
+           String(date.getMonth() + 1).padStart(2, '0') + '-' + 
+           String(date.getDate()).padStart(2, '0') + 'T' +
+           String(date.getHours()).padStart(2, '0') + ':' +
+           String(date.getMinutes()).padStart(2, '0') + ':00'
+    };
+  }
+  
+  // Set dates on page
+  var nextDate = getNextWebinarDate();
+  var formatted = formatDate(nextDate);
+  
+  var bannerEl = document.getElementById('next-date-banner');
+  var inlineEl = document.getElementById('next-date-inline');
+  var hiddenEl = document.getElementById('f-webinar_date');
+  
+  if (bannerEl) bannerEl.textContent = formatted.banner;
+  if (inlineEl) inlineEl.textContent = formatted.inline;
+  if (hiddenEl) hiddenEl.value = formatted.iso;
+
+  // ============================================================
+  // UTM CAPTURE
+  // ============================================================
+  
+  var params = new URLSearchParams(window.location.search);
+  var utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fb_ad_id'];
+  
+  utmFields.forEach(function(field) {
+    var el = document.getElementById('f-' + field);
+    var val = params.get(field);
+    if (el && val) el.value = val;
+  });
+
+  // ============================================================
+  // FORM SUBMISSION
+  // ============================================================
+  
+  var form = document.getElementById('webinar-form');
+  var submitBtn = document.getElementById('submit-btn');
+  var errorBox = document.getElementById('form-error');
+  
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Collect form data
+    var formData = new FormData(form);
+    var data = {};
+    formData.forEach(function(value, key) { data[key] = value; });
+    
+    // Add the formatted date for Make.com
+    data.webinar_date_formatted = formatted.full;
+    
+    // Combine phone code + number
+    var phoneCode = document.getElementById('phone-code').value.replace('CA', '');
+    data.phone_full = phoneCode + ' ' + data.phone;
+    data.phone_country_code = phoneCode;
+
+    // Validate required fields
+    if (!data.first_name || !data.email || !data.phone || !data.country) {
+      errorBox.textContent = 'Please fill in all fields.';
+      errorBox.style.display = 'block';
+      return;
+    }
+
+    // Validate phone (minimum 7 digits)
+    var phoneDigits = data.phone.replace(/\D/g, '');
+    if (phoneDigits.length < 7) {
+      errorBox.textContent = 'Please enter a valid phone number.';
+      errorBox.style.display = 'block';
+      return;
+    }
+
+    // Validate qualifying questions
+    if (!data.visited_tulum) {
+      errorBox.textContent = 'Please answer: Have you visited Tulum before?';
+      errorBox.style.display = 'block';
+      return;
+    }
+    if (!data.timeline) {
+      errorBox.textContent = 'Please select your investment timeline.';
+      errorBox.style.display = 'block';
+      return;
+    }
+    
+    // Hide error, show loading
+    errorBox.style.display = 'none';
+    submitBtn.textContent = 'Reserving your spot...';
+    submitBtn.disabled = true;
+    
+    // Send to Make.com webhook
+    fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('Network response was not ok');
+      
+      // Fire Facebook Pixel Lead event
+      if (typeof fbq === 'function') {
+        fbq('track', 'Lead', {
+          content_name: 'Webinar Registration',
+          content_category: 'Selvadentro Webinar'
+        });
+      }
+      
+      // Redirect to thank you page
+      window.location.href = THANK_YOU_PATH;
+    })
+    .catch(function(error) {
+      submitBtn.textContent = 'Reserve my spot';
+      submitBtn.disabled = false;
+      errorBox.textContent = 'Something went wrong. Please try again.';
+      errorBox.style.display = 'block';
+    });
+  });
+
+  // ============================================================
+  // RADIO BUTTON INTERACTION
+  // ============================================================
+
+  document.querySelectorAll('.radio-option input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      // Deselect siblings
+      var group = this.closest('.radio-group');
+      group.querySelectorAll('.radio-option').forEach(function(opt) {
+        opt.classList.remove('selected');
+      });
+      this.closest('.radio-option').classList.add('selected');
+    });
+  });
+
+  // ============================================================
+  // PHONE CODE ↔ COUNTRY SYNC
+  // ============================================================
+
+  var countryToCode = {
+    'US': '+1', 'CA': '+1CA', 'MX': '+52', 'GB': '+44',
+    'AU': '+61', 'DE': '+49', 'FR': '+33', 'ES': '+34',
+    'BR': '+55', 'CO': '+57', 'AR': '+54', 'IN': '+91'
+  };
+
+  var countrySelect = document.getElementById('country');
+  var phoneCodeSelect = document.getElementById('phone-code');
+
+  countrySelect.addEventListener('change', function() {
+    var code = countryToCode[this.value];
+    if (code) phoneCodeSelect.value = code;
+  });
+
+  // ============================================================
+  // PHONE VALIDATION (basic format check)
+  // ============================================================
+
+  var phoneInput = document.getElementById('phone');
+  phoneInput.addEventListener('input', function() {
+    var digits = this.value.replace(/\D/g, '');
+    if (digits.length >= 7) {
+      this.classList.remove('phone-invalid');
+      this.classList.add('phone-valid');
+    } else if (digits.length > 0) {
+      this.classList.remove('phone-valid');
+      this.classList.add('phone-invalid');
+    } else {
+      this.classList.remove('phone-valid', 'phone-invalid');
+    }
+  });
+
+})();
+</script>
+
+</body>
+</html>
