@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In | Selvadentro Webinar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- Facebook Pixel — fires Lead event on load as backup -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '680727997874671');
+fbq('track', 'PageView');
+fbq('track', 'Lead');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"/></noscript>
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --forest: #465241;
+    --forest-deep: #3a4536;
+    --copper: #CF8543;
+    --sand: #D9B37E;
+    --cream: #F5F0E8;
+    --cream-light: #FAF7F2;
+    --white: #ffffff;
+    --text-dark: #2a2a2a;
+    --text-mid: #555;
+    --text-light: #999;
+  }
+  body {
+    font-family: 'Lexend', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--forest) 0%, #65713F 35%, var(--copper) 65%, var(--sand) 100%);
+  }
+
+  .nav {
+    background: var(--cream-light);
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(70,82,65,0.08);
+  }
+  .nav-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .nav-logo {
+    display: block;
+    text-decoration: none;
+  }
+  .nav-logo img {
+    height: 40px;
+    width: auto;
+  }
+
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 20px;
+  }
+
+  .card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 48px 40px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(70,82,65,0.07);
+    border: 1px solid rgba(70,82,65,0.06);
+    animation: fadeUp 0.45s ease-out;
+  }
+
+  .check-circle {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--forest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+  }
+  .check-circle svg { width: 26px; height: 26px; }
+
+  h1 {
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 30px;
+    color: var(--forest);
+    margin-bottom: 12px;
+    font-weight: 700;
+  }
+  .intro {
+    font-size: 15px;
+    color: var(--text-mid);
+    font-weight: 300;
+    line-height: 1.7;
+    margin-bottom: 28px;
+  }
+
+  .steps {
+    text-align: left;
+    margin-bottom: 28px;
+  }
+  .step {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(70,82,65,0.06);
+  }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    background: rgba(207,133,67,0.1);
+    color: var(--copper);
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .step-text {
+    font-size: 14px;
+    color: var(--text-dark);
+    line-height: 1.55;
+    font-weight: 400;
+  }
+  .step-text strong { color: var(--forest); font-weight: 500; }
+
+  .divider {
+    height: 1px;
+    background: rgba(70,82,65,0.08);
+    margin: 4px 0 20px;
+  }
+
+  .social p {
+    font-size: 13px;
+    color: var(--text-light);
+    font-weight: 300;
+    margin-bottom: 6px;
+  }
+  .social a {
+    font-size: 14px;
+    color: var(--copper);
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .social a:hover { text-decoration: underline; }
+
+  .footer {
+    background: var(--forest-deep);
+    padding: 24px;
+    text-align: center;
+  }
+  .footer-logo {
+    margin-bottom: 8px;
+  }
+  .footer-logo img {
+    height: 36px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 540px) {
+    .card { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="accent-bar"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://selvadentrotulum.com" class="nav-logo"><img src="logo.webp" alt="Selvadentro — tierra de cenotes"></a>
+  </div>
+</nav>
+
+<main>
+  <div class="card">
+    <div class="check-circle">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="20 6 9 17 4 12"/>
+      </svg>
+    </div>
+
+    <h1>You're in.</h1>
+    <p class="intro">Your spot is confirmed. Here's what happens next:</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text"><strong>Check your email and phone</strong> for your personal join link and details.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text"><strong>Add it to your calendar</strong> right away so you don't forget. No Zoom account needed.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text"><strong>Show up live and stay till the end</strong> for an exclusive offer that won't be available after.</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="social">
+      <p>While you wait, follow us on Instagram:</p>
+      <a href="https://www.instagram.com/selvadentro.tulum/" target="_blank" rel="noopener">@selvadentro.tulum</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer-logo"><img src="logo.webp" alt="Selvadentro"></div>
+</footer>
+
+</body>
+</html>
