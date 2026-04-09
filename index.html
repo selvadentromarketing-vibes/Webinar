@@ -299,6 +299,79 @@ fbq('track', 'PageView');
     padding-right: 36px;
   }
 
+  .phone-wrapper {
+    display: flex;
+    gap: 8px;
+  }
+  .phone-wrapper select {
+    width: 100px;
+    flex-shrink: 0;
+    font-size: 13px;
+    padding-right: 28px;
+    background-position: right 8px center;
+  }
+  .phone-wrapper input {
+    flex: 1;
+  }
+
+  .phone-valid { border-color: #22c55e !important; }
+  .phone-invalid { border-color: #ef4444 !important; }
+
+  .form-divider {
+    height: 1px;
+    background: var(--border-mid);
+    margin: 18px 0;
+  }
+  .form-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    margin-bottom: 14px;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 4px;
+  }
+  .form-group label.radio-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 14px;
+    background: var(--cream-light);
+    border: 1px solid var(--border-mid);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--text-dark);
+    text-transform: none;
+    letter-spacing: 0;
+    margin-bottom: 0;
+  }
+  .form-group label.radio-option:hover {
+    border-color: var(--copper);
+    background: var(--copper-10);
+  }
+  .radio-option input[type="radio"] {
+    -webkit-appearance: auto;
+    appearance: auto;
+    width: 18px;
+    height: 18px;
+    accent-color: var(--copper);
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .form-group label.radio-option.selected {
+    border-color: var(--copper);
+    background: var(--copper-10);
+  }
+
   .form-submit {
     width: 100%;
     padding: 14px;
@@ -497,10 +570,16 @@ fbq('track', 'PageView');
       <input type="hidden" name="utm_term" id="f-utm_term">
       <input type="hidden" name="fb_ad_id" id="f-fb_ad_id">
       <input type="hidden" name="webinar_date" id="f-webinar_date">
+      <input type="hidden" name="lead_source" value="tulum_investor_webinar">
 
       <div class="form-group">
         <label for="first_name">First name</label>
         <input type="text" id="first_name" name="first_name" placeholder="Your first name" required autocomplete="given-name">
+      </div>
+
+      <div class="form-group">
+        <label for="last_name">Last name</label>
+        <input type="text" id="last_name" name="last_name" placeholder="Your last name" required autocomplete="family-name">
       </div>
 
       <div class="form-group">
@@ -509,8 +588,24 @@ fbq('track', 'PageView');
       </div>
 
       <div class="form-group">
-        <label for="phone">Phone</label>
-        <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" required autocomplete="tel">
+        <label for="phone">Phone / WhatsApp</label>
+        <div class="phone-wrapper">
+          <select id="phone-code" name="phone_country_code" required>
+            <option value="+1" selected>&#x1F1FA;&#x1F1F8; +1</option>
+            <option value="+1CA">&#x1F1E8;&#x1F1E6; +1</option>
+            <option value="+52">&#x1F1F2;&#x1F1FD; +52</option>
+            <option value="+44">&#x1F1EC;&#x1F1E7; +44</option>
+            <option value="+61">&#x1F1E6;&#x1F1FA; +61</option>
+            <option value="+49">&#x1F1E9;&#x1F1EA; +49</option>
+            <option value="+33">&#x1F1EB;&#x1F1F7; +33</option>
+            <option value="+34">&#x1F1EA;&#x1F1F8; +34</option>
+            <option value="+55">&#x1F1E7;&#x1F1F7; +55</option>
+            <option value="+57">&#x1F1E8;&#x1F1F4; +57</option>
+            <option value="+54">&#x1F1E6;&#x1F1F7; +54</option>
+            <option value="+91">&#x1F1EE;&#x1F1F3; +91</option>
+          </select>
+          <input type="tel" id="phone" name="phone" placeholder="(555) 000-0000" required autocomplete="tel">
+        </div>
       </div>
 
       <div class="form-group">
@@ -519,8 +614,56 @@ fbq('track', 'PageView');
           <option value="" disabled selected>Select your country</option>
           <option value="US">United States</option>
           <option value="CA">Canada</option>
+          <option value="MX">Mexico</option>
+          <option value="GB">United Kingdom</option>
+          <option value="AU">Australia</option>
+          <option value="DE">Germany</option>
+          <option value="FR">France</option>
+          <option value="ES">Spain</option>
+          <option value="BR">Brazil</option>
+          <option value="CO">Colombia</option>
+          <option value="AR">Argentina</option>
           <option value="OTHER">Other</option>
         </select>
+      </div>
+
+      <div class="form-divider"></div>
+      <p class="form-section-label">Quick questions</p>
+
+      <div class="form-group">
+        <label>What's your timeline to invest?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Ready now (0-3 months)" required>
+            Ready now (0–3 months)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Soon (3-6 months)">
+            Soon (3–6 months)
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="timeline" value="Gathering info (6+ months)">
+            Gathering info (6+ months)
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label>Have you looked into Tulum real estate before?</label>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="prior_research" value="Yes, actively researching" required>
+            Yes, actively researching
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="prior_research" value="A little, still early">
+            A little, still early
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="prior_research" value="No, this is new to me">
+            No, this is new to me
+          </label>
+        </div>
       </div>
 
       <button type="submit" class="form-submit" id="submit-btn">Reserve my spot</button>
@@ -656,9 +799,23 @@ fbq('track', 'PageView');
   });
 
   // ============================================================
+  // RADIO OPTION STYLING
+  // ============================================================
+
+  document.querySelectorAll('.radio-option input[type="radio"]').forEach(function(radio) {
+    radio.addEventListener('change', function() {
+      var group = this.closest('.radio-group');
+      group.querySelectorAll('.radio-option').forEach(function(opt) {
+        opt.classList.remove('selected');
+      });
+      this.closest('.radio-option').classList.add('selected');
+    });
+  });
+
+  // ============================================================
   // FORM SUBMISSION
   // ============================================================
-  
+
   var form = document.getElementById('webinar-form');
   var submitBtn = document.getElementById('submit-btn');
   var errorBox = document.getElementById('form-error');
