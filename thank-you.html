@@ -9,17 +9,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
 
 <!-- Facebook Pixel — fires Lead event on load as backup -->
+<!--
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '680727997874671');
+fbq('init', 'YOUR_PIXEL_ID');
 fbq('track', 'PageView');
 fbq('track', 'Lead');
 </script>
-<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"/></noscript>
+-->
 
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -60,16 +61,22 @@ fbq('track', 'Lead');
     margin: 0 auto;
     padding: 0 28px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: baseline;
+    justify-content: space-between;
   }
   .nav-logo {
-    display: block;
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--forest);
     text-decoration: none;
   }
-  .nav-logo img {
-    height: 40px;
-    width: auto;
+  .nav-tagline {
+    font-size: 11px;
+    color: var(--sand);
+    letter-spacing: 2.5px;
+    text-transform: lowercase;
+    font-weight: 300;
   }
 
   main {
@@ -178,13 +185,16 @@ fbq('track', 'Lead');
     text-align: center;
   }
   .footer-logo {
-    margin-bottom: 8px;
+    font-family: 'Cardo', Georgia, serif;
+    font-size: 16px;
+    color: var(--white);
+    margin-bottom: 4px;
   }
-  .footer-logo img {
-    height: 36px;
-    width: auto;
-    filter: brightness(0) invert(1);
-    opacity: 0.9;
+  .footer-sub {
+    font-size: 10px;
+    color: var(--sand);
+    letter-spacing: 2px;
+    font-weight: 300;
   }
 
   @keyframes fadeUp {
@@ -202,7 +212,8 @@ fbq('track', 'Lead');
 <div class="accent-bar"></div>
 <nav class="nav">
   <div class="nav-inner">
-    <a href="https://selvadentrotulum.com" class="nav-logo"><img src="logo.webp" alt="Selvadentro — tierra de cenotes"></a>
+    <a href="https://selvadentrotulum.com" class="nav-logo">Selvadentro</a>
+    <span class="nav-tagline">tierra de cenotes</span>
   </div>
 </nav>
 
@@ -236,13 +247,14 @@ fbq('track', 'Lead');
 
     <div class="social">
       <p>While you wait, follow us on Instagram:</p>
-      <a href="https://www.instagram.com/selvadentro.tulum/" target="_blank" rel="noopener">@selvadentro.tulum</a>
+      <a href="https://instagram.com/selvadentro.mx" target="_blank" rel="noopener">@selvadentro.mx</a>
     </div>
   </div>
 </main>
 
 <footer class="footer">
-  <div class="footer-logo"><img src="logo.webp" alt="Selvadentro"></div>
+  <div class="footer-logo">Selvadentro</div>
+  <div class="footer-sub">tierra de cenotes</div>
 </footer>
 
 </body>
