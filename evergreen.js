@@ -23,9 +23,10 @@ window.EVERGREEN = (function () {
     JIT_ROUND_MIN: 15,          //   rounded up to the next 15-min mark
 
     // ── Endpoints ────────────────────────────────────────────────
-    // Registration webhook (existing Make scenario — payload extended
-    // with webinar_session_epoch + watch_url, old fields unchanged).
-    WEBHOOK_URL: 'https://hook.us2.make.com/95ya7r7pkydqk6c54lo6sgitryik2118',
+    // Registration webhook — Make scenario "SLVD Webinar Registration -
+    // Notify" (id 5619136). The original hook (95ya7r7…) was orphaned/dead
+    // (410) after its scenario was deleted; this is its replacement.
+    WEBHOOK_URL: 'https://hook.us2.make.com/r3j6pldpanynbvd8hwrew5xgvsdckms9',
     // Watch-room milestone events (empty string = PostHog only).
     MILESTONE_WEBHOOK_URL: '',
     // Booking CTA shown at the offer reveal.
