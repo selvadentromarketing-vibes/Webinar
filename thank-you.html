@@ -241,20 +241,33 @@ fbq('track', 'Lead');
     </div>
 
     <h1>You're in.</h1>
-    <p class="intro">Your spot is confirmed. Here's what happens next:</p>
+    <p class="intro">Your session is confirmed:</p>
+    <p class="session-line" id="ty-session-line" style="font-size:15px;color:var(--forest);font-weight:500;margin-bottom:18px;">&nbsp;</p>
+
+    <div class="countdown" id="ty-countdown" style="display:flex;justify-content:center;gap:12px;margin-bottom:24px;">
+      <div style="min-width:66px;background:var(--cream-light);border:1px solid rgba(70,82,65,0.1);border-radius:8px;padding:12px 8px;"><div id="ty-cd-d" style="font-family:'Cardo',Georgia,serif;font-size:28px;color:var(--forest);font-weight:700;line-height:1;">0</div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-top:5px;">Days</div></div>
+      <div style="min-width:66px;background:var(--cream-light);border:1px solid rgba(70,82,65,0.1);border-radius:8px;padding:12px 8px;"><div id="ty-cd-h" style="font-family:'Cardo',Georgia,serif;font-size:28px;color:var(--forest);font-weight:700;line-height:1;">0</div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-top:5px;">Hours</div></div>
+      <div style="min-width:66px;background:var(--cream-light);border:1px solid rgba(70,82,65,0.1);border-radius:8px;padding:12px 8px;"><div id="ty-cd-m" style="font-family:'Cardo',Georgia,serif;font-size:28px;color:var(--forest);font-weight:700;line-height:1;">0</div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-top:5px;">Min</div></div>
+      <div style="min-width:66px;background:var(--cream-light);border:1px solid rgba(70,82,65,0.1);border-radius:8px;padding:12px 8px;"><div id="ty-cd-s" style="font-family:'Cardo',Georgia,serif;font-size:28px;color:var(--forest);font-weight:700;line-height:1;">0</div><div style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-top:5px;">Sec</div></div>
+    </div>
+
+    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:26px;">
+      <a id="ty-watch-link" href="/watch.html" style="display:inline-block;background:var(--copper);color:#fff;text-decoration:none;font-size:14px;font-weight:500;padding:12px 24px;border-radius:6px;">Go to my session room</a>
+      <button id="ty-ics" style="display:inline-block;background:transparent;color:var(--forest);border:1px solid rgba(70,82,65,0.3);font-family:'Lexend',sans-serif;font-size:14px;font-weight:500;padding:12px 24px;border-radius:6px;cursor:pointer;">Add to calendar</button>
+    </div>
 
     <div class="steps">
       <div class="step">
         <div class="step-num">1</div>
-        <div class="step-text"><strong>Check your email and phone</strong> for your personal join link and details.</div>
+        <div class="step-text"><strong>Check your email</strong> — your session link and details are on the way.</div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
-        <div class="step-text"><strong>Add it to your calendar</strong> right away so you don't forget. No Zoom account needed.</div>
+        <div class="step-text"><strong>Add it to your calendar</strong> with the button above so you don't miss it.</div>
       </div>
       <div class="step">
         <div class="step-num">3</div>
-        <div class="step-text"><strong>Show up live and stay till the end</strong> for an exclusive offer that won't be available after.</div>
+        <div class="step-text"><strong>Stay until the end</strong> for an exclusive offer that won't be available after your session.</div>
       </div>
     </div>
 
@@ -272,6 +285,37 @@ fbq('track', 'Lead');
   <div class="footer-sub">tierra de cenotes</div>
   <div class="footer-links" style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:10px;"><a href="https://tothemaxmedia.com" rel="noopener" style="color:inherit;">Built by To The Max Media</a></div>
 </footer>
+
+<script src="/evergreen.js"></script>
+<script>
+(function () {
+  var E = window.EVERGREEN;
+  var session = E.currentSession();
+  if (!session) return; // static fallback copy still makes sense
+
+  document.getElementById('ty-session-line').textContent = E.fmtFull(session);
+  document.getElementById('ty-watch-link').href = E.watchUrl(session.getTime());
+  document.getElementById('ty-ics').addEventListener('click', function () {
+    E.downloadIcs(session);
+  });
+
+  function render() {
+    var ms = session - E.now();
+    if (ms <= 0) {
+      clearInterval(timer);
+      window.location.href = E.watchUrl(session.getTime());
+      return;
+    }
+    var s = Math.floor(ms / 1000);
+    document.getElementById('ty-cd-d').textContent = Math.floor(s / 86400);
+    document.getElementById('ty-cd-h').textContent = Math.floor(s % 86400 / 3600);
+    document.getElementById('ty-cd-m').textContent = Math.floor(s % 3600 / 60);
+    document.getElementById('ty-cd-s').textContent = s % 60;
+  }
+  render();
+  var timer = setInterval(render, 1000);
+})();
+</script>
 
 </body>
 </html>

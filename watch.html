@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Session | Selvadentro Webinar</title>
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --forest: #465241;
+    --forest-deep: #3a4536;
+    --copper: #CF8543;
+    --sand: #D9B37E;
+    --cream: #F5F0E8;
+    --cream-light: #FAF7F2;
+    --white: #ffffff;
+    --text-dark: #2a2a2a;
+    --text-mid: #555;
+    --text-light: #999;
+  }
+  body {
+    font-family: 'Lexend', sans-serif;
+    background: var(--cream);
+    color: var(--text-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    -webkit-font-smoothing: antialiased;
+  }
+  .accent-bar {
+    height: 3px;
+    background: linear-gradient(90deg, var(--forest) 0%, #65713F 35%, var(--copper) 65%, var(--sand) 100%);
+  }
+  .nav { background: var(--cream-light); padding: 18px 0; border-bottom: 1px solid rgba(70,82,65,0.08); }
+  .nav-inner { max-width: 1100px; margin: 0 auto; padding: 0 28px; display: flex; align-items: baseline; justify-content: space-between; }
+  .nav-logo { font-family: 'Cardo', Georgia, serif; font-size: 26px; font-weight: 700; color: var(--forest); text-decoration: none; }
+  .nav-tagline { font-size: 11px; color: var(--sand); letter-spacing: 2.5px; text-transform: lowercase; font-weight: 300; }
+
+  main { flex: 1; width: 100%; max-width: 1000px; margin: 0 auto; padding: 32px 20px 56px; }
+
+  .state { display: none; animation: fadeUp 0.45s ease-out; }
+  .state.active { display: block; }
+
+  /* Shared card look (countdown + ended states) */
+  .card {
+    background: var(--white);
+    border-radius: 8px;
+    padding: 48px 40px;
+    max-width: 520px;
+    margin: 48px auto 0;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(70,82,65,0.07);
+    border: 1px solid rgba(70,82,65,0.06);
+  }
+  .card h1 { font-family: 'Cardo', Georgia, serif; font-size: 30px; color: var(--forest); margin-bottom: 12px; font-weight: 700; }
+  .card p { font-size: 15px; color: var(--text-mid); font-weight: 300; line-height: 1.7; }
+  .session-line { margin-top: 10px; font-size: 14px; color: var(--forest); font-weight: 500; }
+
+  .countdown { display: flex; justify-content: center; gap: 14px; margin: 28px 0; }
+  .cd-cell { min-width: 74px; background: var(--cream-light); border: 1px solid rgba(70,82,65,0.1); border-radius: 8px; padding: 14px 10px; }
+  .cd-num { font-family: 'Cardo', Georgia, serif; font-size: 32px; color: var(--forest); font-weight: 700; line-height: 1; }
+  .cd-label { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text-light); margin-top: 6px; }
+
+  .btn {
+    display: inline-block; border: none; cursor: pointer; text-decoration: none;
+    background: var(--copper); color: var(--white);
+    font-family: 'Lexend', sans-serif; font-size: 15px; font-weight: 500;
+    padding: 14px 30px; border-radius: 6px; transition: background 0.2s ease;
+  }
+  .btn:hover { background: #b87336; }
+  .btn-ghost {
+    background: transparent; color: var(--forest);
+    border: 1px solid rgba(70,82,65,0.3);
+  }
+  .btn-ghost:hover { background: rgba(70,82,65,0.06); }
+  .btn-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 22px; }
+
+  /* Player */
+  .player-head { text-align: center; margin-bottom: 18px; }
+  .player-head h1 { font-family: 'Cardo', Georgia, serif; font-size: 26px; color: var(--forest); font-weight: 700; }
+  .player-head p { font-size: 13px; color: var(--text-light); margin-top: 4px; }
+  .player-wrap {
+    position: relative; background: #000; border-radius: 10px; overflow: hidden;
+    box-shadow: 0 16px 48px rgba(58,69,54,0.25);
+    aspect-ratio: 16 / 9;
+  }
+  .player-wrap video { width: 100%; height: 100%; display: block; }
+  .join-overlay {
+    position: absolute; inset: 0; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 16px;
+    background: rgba(38,46,36,0.92); color: var(--cream); text-align: center; padding: 20px;
+  }
+  .join-overlay h2 { font-family: 'Cardo', Georgia, serif; font-size: 24px; font-weight: 700; }
+  .join-overlay p { font-size: 13px; color: rgba(245,240,230,0.7); max-width: 380px; line-height: 1.6; }
+  .live-note {
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    margin-top: 14px; font-size: 12px; color: var(--text-light);
+  }
+  .live-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--copper); animation: pulse 2s infinite; }
+
+  /* Offer panel */
+  .offer {
+    display: none; margin-top: 26px; background: var(--forest);
+    border-radius: 10px; padding: 32px 28px; text-align: center; color: var(--cream);
+    animation: fadeUp 0.5s ease-out;
+  }
+  .offer.visible { display: block; }
+  .offer-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sand); margin-bottom: 10px; }
+  .offer h2 { font-family: 'Cardo', Georgia, serif; font-size: 26px; font-weight: 700; margin-bottom: 10px; }
+  .offer p { font-size: 14px; color: rgba(245,240,230,0.75); line-height: 1.7; max-width: 460px; margin: 0 auto 20px; }
+
+  .footer { background: var(--forest-deep); padding: 24px; text-align: center; margin-top: auto; }
+  .footer-logo { font-family: 'Cardo', Georgia, serif; font-size: 16px; color: var(--white); margin-bottom: 4px; }
+  .footer-sub { font-size: 10px; color: var(--sand); letter-spacing: 2px; font-weight: 300; }
+  .footer-links { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 10px; }
+  .footer-links a { color: inherit; }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  @media (max-width: 540px) {
+    .card { padding: 36px 24px; }
+    .cd-cell { min-width: 62px; }
+  }
+</style>
+
+    <!-- Microsoft Clarity -->
+    <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "xfbmy7v603");
+    </script>
+
+    <!-- PostHog -->
+    <script>
+      !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="capture identify alias people.set people.set_once set_config register register_once unregister opt_out_capturing has_opted_out_capturing opt_in_capturing reset isFeatureEnabled onFeatureFlags getFeatureFlag getFeatureFlagPayload reloadFeatureFlags group updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures getActiveMatchingSurveys getSurveys getNextSurveyStep onSessionId".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+      posthog.init('phc_wmzsqH3ayo25w5rpiLWL8LXtJS4d4uWfY5Ty2X5Lxzrq', {api_host:'https://us.i.posthog.com', person_profiles:'identified_only', cross_subdomain_cookie:true, persistence:'localStorage+cookie'});
+    </script>
+</head>
+<body>
+
+<div class="accent-bar"></div>
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="https://selvadentrotulum.com" class="nav-logo">Selvadentro</a>
+    <span class="nav-tagline">tierra de cenotes</span>
+  </div>
+</nav>
+
+<main>
+
+  <!-- STATE: no session found -->
+  <section class="state" id="state-none">
+    <div class="card">
+      <h1>Session not found</h1>
+      <p>We couldn't find your session link. Register below and pick a time that works for you.</p>
+      <div class="btn-row"><a class="btn" href="/">Choose a session</a></div>
+    </div>
+  </section>
+
+  <!-- STATE: countdown before session -->
+  <section class="state" id="state-early">
+    <div class="card">
+      <h1>Your session starts soon</h1>
+      <p class="session-line" id="early-session-line"></p>
+      <div class="countdown">
+        <div class="cd-cell"><div class="cd-num" id="cd-d">0</div><div class="cd-label">Days</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-h">0</div><div class="cd-label">Hours</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-m">0</div><div class="cd-label">Min</div></div>
+        <div class="cd-cell"><div class="cd-num" id="cd-s">0</div><div class="cd-label">Sec</div></div>
+      </div>
+      <p>This page will start automatically. Keep it open, or add the session to your calendar.</p>
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="early-ics">Add to calendar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATE: session open (player) -->
+  <section class="state" id="state-open">
+    <div class="player-head">
+      <h1>Tulum Land Investing — Investor Masterclass</h1>
+      <p id="open-session-line"></p>
+    </div>
+    <div class="player-wrap">
+      <video id="player" playsinline preload="auto"></video>
+      <div class="join-overlay" id="join-overlay">
+        <h2 id="join-title">Your session is ready</h2>
+        <p id="join-sub">Click below to join. The presentation plays in session time — seeking ahead is disabled.</p>
+        <button class="btn" id="join-btn">Join session</button>
+      </div>
+    </div>
+    <div class="live-note">
+      <span class="live-dot"></span><span>Session in progress — no replay after it ends</span>
+      <button id="unmute-pill" style="display:none;align-items:center;gap:6px;margin-left:10px;background:var(--copper);color:#fff;border:none;border-radius:999px;padding:6px 14px;font-family:'Lexend',sans-serif;font-size:12px;font-weight:500;cursor:pointer;">🔊 Tap to unmute</button>
+    </div>
+
+    <div class="offer" id="offer">
+      <div class="offer-label">Exclusive for attendees</div>
+      <h2>Pre-sale pricing, released now</h2>
+      <p>Book a call with our team to access pre-sale pricing on select lots — available only to masterclass attendees, while this session's allocation lasts.</p>
+      <a class="btn" id="offer-cta" href="#" target="_blank" rel="noopener">Book my call</a>
+    </div>
+  </section>
+
+  <!-- STATE: session ended -->
+  <section class="state" id="state-ended">
+    <div class="card">
+      <h1>This session has ended</h1>
+      <p>There's no replay — but you can join the next session for free.</p>
+      <p class="session-line" id="ended-next-line"></p>
+      <div class="btn-row">
+        <a class="btn" id="ended-join-next" href="#">Join the next session</a>
+        <a class="btn btn-ghost" href="/">Pick another time</a>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer-logo">Selvadentro</div>
+  <div class="footer-sub">tierra de cenotes</div>
+  <div class="footer-links"><a href="https://tothemaxmedia.com" rel="noopener">Built by To The Max Media</a></div>
+</footer>
+
+<script src="/evergreen.js"></script>
+<script>
+(function () {
+  'use strict';
+  var E = window.EVERGREEN;
+  var C = E.CONFIG;
+
+  var session = E.currentSession();
+  var reg = E.loadRegistration() || {};
+  if (reg.email && window.posthog && posthog.identify) posthog.identify(reg.email);
+
+  function show(id) {
+    document.querySelectorAll('.state').forEach(function (s) { s.classList.remove('active'); });
+    document.getElementById(id).classList.add('active');
+  }
+
+  if (!session) { show('state-none'); return; }
+
+  var sessionLine = 'Session: ' + E.fmtFull(session);
+  document.getElementById('early-session-line').textContent = sessionLine;
+  document.getElementById('open-session-line').textContent = sessionLine;
+
+  document.getElementById('early-ics').addEventListener('click', function () {
+    E.downloadIcs(session);
+  });
+
+  // ── State machine ──────────────────────────────────────────────
+  var video = document.getElementById('player');
+  var overlay = document.getElementById('join-overlay');
+  var joined = false;
+  var fired = {};          // milestone guards
+  var maxAllowed = 0;      // furthest point (sec) the viewer may be at
+
+  function elapsedSec() { return (E.now() - session) / 1000; }
+
+  function fireOnce(name, extra) {
+    if (fired[name]) return;
+    fired[name] = true;
+    E.trackMilestone(name, session, extra);
+  }
+
+  function showEnded() {
+    var next = E.upcomingSessions()[0];
+    document.getElementById('ended-next-line').textContent = 'Next session: ' + E.fmtFull(next);
+    document.getElementById('ended-join-next').href = E.watchUrl(next.getTime());
+    // Joining the next session from here keeps the registration valid —
+    // update the stored session so reminders/UI agree.
+    document.getElementById('ended-join-next').addEventListener('click', function () {
+      E.saveRegistration(Object.assign({}, reg, { epoch: next.getTime() }));
+    });
+    show('state-ended');
+  }
+
+  function enterOpen() {
+    show('state-open');
+    video.src = C.VIDEO_URL;
+    var late = Math.max(0, Math.floor(elapsedSec()));
+    if (late > 60) {
+      document.getElementById('join-title').textContent = 'Your session is in progress';
+      document.getElementById('join-sub').textContent =
+        'You’re joining ' + Math.round(late / 60) + ' minutes in — the session plays in real time.';
+    }
+    fireOnce('room_entered', { late_sec: late });
+  }
+
+  function startPlayback() {
+    joined = true;
+    overlay.style.display = 'none';
+    var begin = function () {
+      var dur = (isFinite(video.duration) && video.duration) || C.VIDEO_DURATION_SEC;
+      var offset = Math.max(0, Math.min(elapsedSec(), dur - 1));
+      // Allow the initial offset seek through the seek guard, then anchor it.
+      maxAllowed = offset + 2;
+      video.currentTime = offset;
+      // If the host clamps the seek (no Range support / seekable not yet
+      // covering the offset), retry as data buffers until it sticks.
+      if (offset > 5) {
+        var retry = function () {
+          if (video.currentTime < offset - 5) {
+            for (var i = 0; i < video.seekable.length; i++) {
+              if (video.seekable.end(i) >= offset) { video.currentTime = offset; return; }
+            }
+          } else {
+            video.removeEventListener('progress', retry);
+          }
+        };
+        video.addEventListener('progress', retry);
+      }
+      var p = video.play();
+      if (p && p.catch) {
+        p.catch(function () {
+          // Autoplay policy refused sound — start muted (standard webinar
+          // fallback) and surface a one-tap unmute pill.
+          video.muted = true;
+          video.play();
+          unmutePill.style.display = 'inline-flex';
+        });
+      }
+      fireOnce('watch_started', { offset_sec: Math.floor(offset) });
+    };
+    // Seeking before metadata is loaded gets dropped by the browser —
+    // wait for it so late joiners really start at session time.
+    if (video.readyState >= 1) begin();
+    else video.addEventListener('loadedmetadata', begin, { once: true });
+  }
+
+  var unmutePill = document.getElementById('unmute-pill');
+  unmutePill.addEventListener('click', function () {
+    video.muted = false;
+    unmutePill.style.display = 'none';
+  });
+
+  document.getElementById('join-btn').addEventListener('click', startPlayback);
+
+  // Seek guard that also covers paused seeks (timeupdate only fires
+  // during playback).
+  video.addEventListener('seeking', function () {
+    if (joined && video.currentTime > maxAllowed + 3) {
+      video.currentTime = maxAllowed;
+    }
+  });
+
+  // No seeking ahead: video has no controls, and any programmatic/gesture
+  // seek past "session time" snaps back.
+  video.addEventListener('timeupdate', function () {
+    if (!joined) return;
+    var t = video.currentTime;
+    if (t > maxAllowed + 3) { video.currentTime = maxAllowed; return; }
+    maxAllowed = Math.max(maxAllowed, t);
+
+    var dur = C.VIDEO_DURATION_SEC;
+    if (t >= dur * 0.25) fireOnce('watch_25');
+    if (t >= dur * 0.50) fireOnce('watch_50');
+    if (t >= dur * 0.75) fireOnce('watch_75');
+    if (t >= C.OFFER_AT_SEC) {
+      document.getElementById('offer').classList.add('visible');
+      document.getElementById('offer-cta').href = C.CALENDAR_URL;
+      fireOnce('offer_seen');
+    }
+  });
+
+  video.addEventListener('ended', function () {
+    fireOnce('watch_completed');
+    showEnded();
+  });
+
+  // A broken/unsupported VIDEO_URL must never be a silent black box.
+  video.addEventListener('error', function () {
+    overlay.style.display = 'flex';
+    document.getElementById('join-title').textContent = 'Trouble loading the session';
+    document.getElementById('join-sub').textContent =
+      'The video could not be loaded. Refresh the page to retry — if it persists, our team has been notified.';
+    document.getElementById('join-btn').textContent = 'Refresh';
+    document.getElementById('join-btn').onclick = function () { location.reload(); };
+    fireOnce('video_error', { code: video.error && video.error.code });
+  });
+
+  // Keep the offer + CTA visible if they finish; count tab-close mid-watch
+  window.addEventListener('pagehide', function () {
+    if (joined && !fired.watch_completed) {
+      fireOnce('left_early', { at_sec: Math.floor(video.currentTime) });
+    }
+  });
+
+  // ── Initial route + countdown loop ─────────────────────────────
+  function route() {
+    var el = elapsedSec();
+    if (el < 0) {
+      show('state-early');
+      tickCountdown();
+    } else if (el < C.VIDEO_DURATION_SEC - 5) {
+      enterOpen();
+    } else {
+      fireOnce('arrived_after_end');
+      showEnded();
+    }
+  }
+
+  var cdTimer = null;
+  function tickCountdown() {
+    function render() {
+      var ms = session - E.now();
+      if (ms <= 0) {
+        clearInterval(cdTimer);
+        enterOpen();
+        return;
+      }
+      var s = Math.floor(ms / 1000);
+      document.getElementById('cd-d').textContent = Math.floor(s / 86400);
+      document.getElementById('cd-h').textContent = Math.floor(s % 86400 / 3600);
+      document.getElementById('cd-m').textContent = Math.floor(s % 3600 / 60);
+      document.getElementById('cd-s').textContent = s % 60;
+    }
+    render();
+    cdTimer = setInterval(render, 1000);
+  }
+
+  route();
+})();
+</script>
+
+</body>
+</html>

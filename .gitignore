@@ -4,3 +4,5 @@ node_modules/
 .claude-flow/
 .netlify/
 dist/
+test-session.webm
+.claude/

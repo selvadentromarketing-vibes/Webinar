@@ -6,7 +6,7 @@
 <title>Tulum Investors Webinar | Selvadentro</title>
 <meta name="description" content="Join our free Thursday webinar to discover why smart investors are buying jungle land in the Riviera Maya.">
 <meta property="og:title" content="Tulum Investors Webinar | Selvadentro">
-<meta property="og:description" content="Free 45-minute breakdown of Tulum land investing. Real numbers. Live every Thursday.">
+<meta property="og:description" content="Free 45-minute breakdown of Tulum land investing. Real numbers. Sessions every day.">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -533,33 +533,33 @@ fbq('track', 'PageView');
   <div>
     <div class="hero-badge">
       <span class="pulse"></span>
-      Live every Thursday
+      Sessions every day
     </div>
 
     <h1>The Tulum opportunity most investors are missing</h1>
 
     <p class="hero-intro">
-      Join us <strong id="next-date-inline">this Thursday</strong> for a 45-minute breakdown of the numbers, the legal process, and the specific area in the Riviera Maya where land prices haven't caught up yet.
+      Join us <strong id="next-date-inline">today</strong> for a 45-minute breakdown of the numbers, the legal process, and the specific area in the Riviera Maya where land prices haven't caught up yet.
     </p>
 
     <ul class="hero-points">
       <li>Why the inland jungle corridor is outperforming coastal Tulum right now</li>
       <li>Real lot prices, appreciation data, and projected ROI</li>
       <li>How foreign buyers legally own land in Mexico (it's simpler than you think)</li>
-      <li>An exclusive offer for live attendees who stay until the end</li>
+      <li>An exclusive offer for attendees who stay until the end</li>
     </ul>
 
     <div class="hero-meta">
       <div class="meta-item">
         <span>45 minutes</span>
-        <small>Presentation + live Q&A</small>
+        <small>Focused presentation</small>
       </div>
       <div class="meta-item">
         <span>Free</span>
         <small>No obligation</small>
       </div>
       <div class="meta-item">
-        <span>Live only</span>
+        <span>One sitting</span>
         <small>No replay available</small>
       </div>
     </div>
@@ -567,7 +567,7 @@ fbq('track', 'PageView');
 
   <div class="form-card">
     <div class="form-date-banner">
-      <p>Next webinar</p>
+      <p>Your session</p>
       <span id="next-date-banner">Loading...</span>
     </div>
 
@@ -586,6 +586,11 @@ fbq('track', 'PageView');
       <input type="hidden" name="fb_ad_id" id="f-fb_ad_id">
       <input type="hidden" name="webinar_date" id="f-webinar_date">
       <input type="hidden" name="lead_source" value="tulum_investor_webinar">
+
+      <div class="form-group">
+        <label>Pick your session</label>
+        <div class="radio-group" id="session-picker"><!-- populated by evergreen.js --></div>
+      </div>
 
       <div class="form-group">
         <label for="first_name">First name</label>
@@ -689,9 +694,9 @@ fbq('track', 'PageView');
 
 <section class="incentive">
   <div class="incentive-inner">
-    <p class="incentive-label">Exclusive for live attendees</p>
+    <p class="incentive-label">Exclusive for attendees</p>
     <h3>Stay until the end for something we've never offered publicly</h3>
-    <p>We're releasing pre-sale pricing on select lots exclusively for webinar attendees who watch the full presentation. This pricing will not be available after the webinar ends.</p>
+    <p>We're releasing pre-sale pricing on select lots exclusively for attendees who watch the full presentation. This pricing is not available after your session ends.</p>
   </div>
 </section>
 
@@ -701,104 +706,48 @@ fbq('track', 'PageView');
   <div class="footer-links"><a href="https://selvadentrotulum.com">selvadentrotulum.com</a> &middot; <a href="https://tothemaxmedia.com" rel="noopener">Built by To The Max Media</a></div>
 </footer>
 
+<script src="/evergreen.js"></script>
 <script>
 (function() {
   // ============================================================
-  // CONFIGURATION — Edit these values
+  // EVERGREEN SESSIONS — engine + config live in /evergreen.js
   // ============================================================
-  
-  // Your Make.com webhook URL (replace with your actual URL)
-  var WEBHOOK_URL = 'https://hook.us2.make.com/95ya7r7pkydqk6c54lo6sgitryik2118';
-  
-  // Webinar time: hour in 24h format, timezone offset from UTC
-  // 7:00 PM EST = 19, offset = -5
-  var WEBINAR_HOUR = 19;      // 7 PM
-  var WEBINAR_MINUTE = 0;
-  var TIMEZONE_LABEL = 'EST';  // Display label
-  var UTC_OFFSET = -5;         // EST = UTC-5
-  
-  // Day of week: 0=Sun, 1=Mon, 2=Tue, 3=Wed, 4=Thu, 5=Fri, 6=Sat
-  var WEBINAR_DAY = 4;         // Thursday
-  
-  // Cutoff: if it's already webinar day and past this hour (local),
-  // roll to next week. Set to a few hours before webinar.
-  var CUTOFF_HOUR = 17;        // 5 PM on webinar day = roll to next week
-  
-  // Thank you page path
-  var THANK_YOU_PATH = '/thank-you.html';
 
-  // ============================================================
-  // ROLLING DATE CALCULATION
-  // ============================================================
-  
-  function getNextWebinarDate() {
-    var now = new Date();
-    
-    // Calculate based on the webinar's timezone
-    // Create a date in UTC that represents "now" in the webinar timezone
-    var localNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-    
-    var currentDay = localNow.getDay();
-    var currentHour = localNow.getHours();
-    
-    var daysUntil = WEBINAR_DAY - currentDay;
-    
-    if (daysUntil < 0) {
-      // Already past the webinar day this week
-      daysUntil += 7;
-    } else if (daysUntil === 0 && currentHour >= CUTOFF_HOUR) {
-      // It's webinar day but past cutoff — roll to next week
-      daysUntil = 7;
-    }
-    
-    var nextDate = new Date(localNow);
-    nextDate.setDate(nextDate.getDate() + daysUntil);
-    nextDate.setHours(WEBINAR_HOUR, WEBINAR_MINUTE, 0, 0);
-    
-    return nextDate;
-  }
-  
-  function formatDate(date) {
-    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    var months = ['January','February','March','April','May','June',
-                  'July','August','September','October','November','December'];
-    
-    var dayName = days[date.getDay()];
-    var monthName = months[date.getMonth()];
-    var dayNum = date.getDate();
-    
-    var hours = date.getHours();
-    var ampm = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    if (hours === 0) hours = 12;
-    
-    var minutes = date.getMinutes();
-    var minuteStr = minutes === 0 ? '' : ':' + (minutes < 10 ? '0' : '') + minutes;
-    
-    return {
-      full: dayName + ', ' + monthName + ' ' + dayNum + ' at ' + hours + minuteStr + ' ' + ampm + ' ' + TIMEZONE_LABEL,
-      short: dayName + ', ' + monthName + ' ' + dayNum,
-      banner: dayName + ', ' + monthName + ' ' + dayNum + ' — ' + hours + minuteStr + ' ' + ampm + ' ' + TIMEZONE_LABEL,
-      inline: 'this ' + dayName,
-      iso: date.getFullYear() + '-' + 
-           String(date.getMonth() + 1).padStart(2, '0') + '-' + 
-           String(date.getDate()).padStart(2, '0') + 'T' +
-           String(date.getHours()).padStart(2, '0') + ':' +
-           String(date.getMinutes()).padStart(2, '0') + ':00'
-    };
-  }
-  
-  // Set dates on page
-  var nextDate = getNextWebinarDate();
-  var formatted = formatDate(nextDate);
-  
+  var E = window.EVERGREEN;
+  var WEBHOOK_URL = E.CONFIG.WEBHOOK_URL;
+  var THANK_YOU_PATH = E.CONFIG.THANK_YOU_PATH;
+
+  var sessions = E.upcomingSessions();
+  var picker = document.getElementById('session-picker');
   var bannerEl = document.getElementById('next-date-banner');
   var inlineEl = document.getElementById('next-date-inline');
   var hiddenEl = document.getElementById('f-webinar_date');
-  
-  if (bannerEl) bannerEl.textContent = formatted.banner;
-  if (inlineEl) inlineEl.textContent = formatted.inline;
-  if (hiddenEl) hiddenEl.value = formatted.iso;
+  var selectedSession = sessions[0];
+
+  sessions.forEach(function (sess, i) {
+    var label = document.createElement('label');
+    label.className = 'radio-option' + (i === 0 ? ' selected' : '');
+    var input = document.createElement('input');
+    input.type = 'radio';
+    input.name = 'session_choice';
+    input.value = String(sess.getTime());
+    input.required = true;
+    if (i === 0) input.checked = true;
+    label.appendChild(input);
+    label.appendChild(document.createTextNode(' ' + E.fmtLabel(sess)));
+    input.addEventListener('change', function () {
+      selectedSession = new Date(parseInt(this.value, 10));
+      syncSession();
+    });
+    picker.appendChild(label);
+  });
+
+  function syncSession() {
+    if (bannerEl) bannerEl.textContent = E.fmtFull(selectedSession);
+    if (inlineEl) inlineEl.textContent = E.fmtLabel(selectedSession).toLowerCase().replace('starts in', 'in');
+    if (hiddenEl) hiddenEl.value = E.isoLocal(selectedSession);
+  }
+  syncSession();
 
   // ============================================================
   // UTM CAPTURE
@@ -843,8 +792,13 @@ fbq('track', 'PageView');
     var data = {};
     formData.forEach(function(value, key) { data[key] = value; });
     
-    // Add the formatted date for Make.com
-    data.webinar_date_formatted = formatted.full;
+    // Session payload for Make.com / GHL (webinar_date stays for
+    // backward compatibility with the existing scenario)
+    data.webinar_date_formatted = E.fmtFull(selectedSession);
+    data.webinar_session_epoch = selectedSession.getTime();
+    data.webinar_session_iso = E.isoLocal(selectedSession);
+    data.watch_url = E.watchUrl(selectedSession.getTime());
+    data.visitor_timezone = (Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
     
     // Validate
     if (!data.first_name || !data.email || !data.phone || !data.country) {
@@ -875,8 +829,15 @@ fbq('track', 'PageView');
         });
       }
       
-      // Redirect to thank you page
-      window.location.href = THANK_YOU_PATH;
+      // Remember the registration for the thank-you + watch pages
+      E.saveRegistration({
+        epoch: selectedSession.getTime(),
+        email: data.email,
+        first_name: data.first_name
+      });
+
+      // Redirect to thank you page (session in the URL)
+      window.location.href = THANK_YOU_PATH + '?s=' + selectedSession.getTime();
     })
     .catch(function(error) {
       submitBtn.textContent = 'Reserve my spot';
