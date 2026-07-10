@@ -23,10 +23,11 @@ window.EVERGREEN = (function () {
     JIT_ROUND_MIN: 15,          //   rounded up to the next 15-min mark
 
     // ── Endpoints ────────────────────────────────────────────────
-    // Registration webhook — Make scenario "SLVD Webinar Registration -
-    // Notify" (id 5619136). The original hook (95ya7r7…) was orphaned/dead
-    // (410) after its scenario was deleted; this is its replacement.
-    WEBHOOK_URL: 'https://hook.us2.make.com/r3j6pldpanynbvd8hwrew5xgvsdckms9',
+    // Registration webhook — GHL inbound webhook (SLVD's own workflow, per
+    // "everything SLVD on their infrastructure"). Payload includes
+    // webinar_session_iso / webinar_date_formatted / watch_url /
+    // visitor_timezone for reminder emails.
+    WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/5be1a789-e3d2-4621-b5b3-c1df0da44469',
     // Watch-room milestone events (empty string = PostHog only).
     MILESTONE_WEBHOOK_URL: '',
     // Booking CTA shown at the offer reveal.
