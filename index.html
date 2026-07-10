@@ -583,6 +583,12 @@ fbq('track', 'PageView');
       <input type="hidden" name="utm_content" id="f-utm_content">
       <input type="hidden" name="utm_term" id="f-utm_term">
       <input type="hidden" name="fb_ad_id" id="f-fb_ad_id">
+      <input type="hidden" name="gclid" id="f-gclid">
+      <input type="hidden" name="fbclid" id="f-fbclid">
+      <input type="hidden" name="ad_id" id="f-ad_id">
+      <input type="hidden" name="adset_id" id="f-adset_id">
+      <input type="hidden" name="campaign_id" id="f-campaign_id">
+      <input type="hidden" name="search_term" id="f-search_term">
       <input type="hidden" name="webinar_date" id="f-webinar_date">
       <input type="hidden" name="lead_source" value="tulum_investor_webinar">
 
@@ -752,12 +758,44 @@ fbq('track', 'PageView');
   // ============================================================
   
   var params = new URLSearchParams(window.location.search);
-  var utmFields = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term', 'fb_ad_id'];
-  
-  utmFields.forEach(function(field) {
+  function pickFirst(keys) {
+    for (var i = 0; i < keys.length; i++) {
+      var v = params.get(keys[i]);
+      if (v) return v;
+    }
+    return '';
+  }
+  // Same hidden-field standard as the lotes squeeze pages (per Hoshi),
+  // persisted so attribution survives a revisit without params.
+  var TRACK_KEY = 'tracking_params';
+  var fresh = {
+    utm_source: params.get('utm_source') || '',
+    utm_medium: params.get('utm_medium') || '',
+    utm_campaign: params.get('utm_campaign') || '',
+    utm_content: params.get('utm_content') || '',
+    utm_term: params.get('utm_term') || '',
+    gclid: params.get('gclid') || '',
+    fbclid: params.get('fbclid') || '',
+    ad_id: pickFirst(['ad_id', 'ad_source_id', 'fb_ad_id']),
+    fb_ad_id: pickFirst(['fb_ad_id', 'ad_id']),
+    adset_id: pickFirst(['adset_id', 'fb_adset_id']),
+    campaign_id: pickFirst(['campaign_id', 'fb_campaign_id']),
+    search_term: pickFirst(['search_term', 'keyword']),
+    landing_page: window.location.href
+  };
+  var hasSignal = Object.keys(fresh).some(function (k) {
+    return k !== 'landing_page' && fresh[k];
+  });
+  var trackData = fresh;
+  try {
+    if (hasSignal || !localStorage.getItem(TRACK_KEY)) {
+      localStorage.setItem(TRACK_KEY, JSON.stringify(fresh));
+    }
+    trackData = JSON.parse(localStorage.getItem(TRACK_KEY)) || fresh;
+  } catch (e) {}
+  Object.keys(trackData).forEach(function(field) {
     var el = document.getElementById('f-' + field);
-    var val = params.get(field);
-    if (el && val) el.value = val;
+    if (el && trackData[field]) el.value = trackData[field];
   });
 
   // ============================================================
@@ -797,6 +835,17 @@ fbq('track', 'PageView');
     data.webinar_session_iso = E.isoLocal(selectedSession);
     data.watch_url = E.watchUrl(selectedSession.getTime());
     data.visitor_timezone = (Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
+
+    // Squeeze-standard attribution (from the persisted capture above)
+    data.landing_page = trackData.landing_page || window.location.href;
+    data.page_url = window.location.href;
+    data.ad_source_id = data.ad_id || '';
+    data.source_label = 'webinar';
+    data.form_name = 'webinar-registration';
+    data['contact.source'] = data.utm_source || 'webinar';
+    data['contact.campaign'] = data.utm_campaign || '';
+    data['contact.ad_ctwa_clid'] = data.fbclid || data.gclid || '';
+    data.campaign_label = data.utm_campaign || 'Direct';
     
     // Validate
     if (!data.first_name || !data.email || !data.phone || !data.country) {
