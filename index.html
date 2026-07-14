@@ -827,6 +827,19 @@ fbq('track', 'PageView');
     var formData = new FormData(form);
     var data = {};
     formData.forEach(function(value, key) { data[key] = value; });
+
+    // Bake the country code into the phone (E.164) — GHL needs
+    // "+<country><number>" to dial / WhatsApp / match contacts.
+    // Mirrors normalizeE164 on the lotes forms. "+1CA" is Canada's
+    // picker value (shares +1) — strip letters before prefixing.
+    (function () {
+      var code = (data.phone_country_code || '+52').replace(/[^\d+]/g, '');
+      var raw = (data.phone || '').replace(/[\s()\-.]/g, '');
+      if (raw.charAt(0) === '+') { data.phone = raw; return; }
+      var digits = raw.replace(/\D/g, '');
+      data.phone = digits ? code + digits : '';
+    })();
+
     
     // Session payload for Make.com / GHL (webinar_date stays for
     // backward compatibility with the existing scenario)
