@@ -875,11 +875,23 @@ fbq('track', 'PageView');
     submitBtn.textContent = 'Reserving your spot...';
     submitBtn.disabled = true;
     
-    // Send to Make.com webhook
-    fetch(WEBHOOK_URL, {
+    // Post to our backend (stores for exact-time reminders + forwards
+    // to GHL). Falls back to the GHL webhook directly if it errors.
+    fetch('/.netlify/functions/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
+    })
+    .then(function(response) {
+      if (!response.ok) throw new Error('register endpoint failed');
+      return response;
+    })
+    .catch(function() {
+      return fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
     })
     .then(function(response) {
       if (!response.ok) throw new Error('Network response was not ok');
