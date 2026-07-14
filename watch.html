@@ -120,6 +120,27 @@
   .footer-links { font-size: 11px; color: rgba(255,255,255,0.3); margin-top: 10px; }
   .footer-links a { color: inherit; }
 
+  /* End-of-webinar booking modal */
+  .end-modal {
+    display: none; position: fixed; inset: 0; z-index: 60;
+    background: rgba(28,34,27,0.78); backdrop-filter: blur(3px);
+    align-items: center; justify-content: center; padding: 20px;
+  }
+  .end-modal.visible { display: flex; animation: fadeUp 0.35s ease-out; }
+  .end-modal-card {
+    background: var(--forest); border-radius: 12px; max-width: 440px; width: 100%;
+    padding: 38px 32px; text-align: center; color: var(--cream);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4);
+  }
+  .end-modal-card .offer-label { font-size: 11px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--sand); margin-bottom: 10px; }
+  .end-modal-card h2 { font-family: 'Cardo', Georgia, serif; font-size: 26px; font-weight: 700; margin-bottom: 12px; }
+  .end-modal-card p { font-size: 14px; color: rgba(245,240,230,0.78); line-height: 1.7; margin-bottom: 22px; }
+  .end-modal-later {
+    display: block; margin: 14px auto 0; background: none; border: none; cursor: pointer;
+    color: rgba(245,240,230,0.5); font-family: 'Lexend', sans-serif; font-size: 12px; text-decoration: underline;
+  }
+  .end-modal-later:hover { color: rgba(245,240,230,0.8); }
+
   @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
   @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
 
@@ -223,6 +244,17 @@
   </section>
 
 </main>
+
+<!-- End-of-webinar booking modal -->
+<div class="end-modal" id="end-modal" role="dialog" aria-modal="true" aria-labelledby="end-modal-title">
+  <div class="end-modal-card">
+    <div class="offer-label">Before you go</div>
+    <h2 id="end-modal-title">Book your private session</h2>
+    <p>You've seen the opportunity — now see the lots. A 1-on-1 with our team: current pricing, availability, and your questions answered. No obligation.</p>
+    <a class="btn" id="end-modal-cta" href="#" target="_blank" rel="noopener">Book my private session</a>
+    <button type="button" class="end-modal-later" id="end-modal-later">Maybe later</button>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="footer-logo"><img src="/logo.webp" alt="Selvadentro — tierra de cenotes" style="height:40px;width:auto;filter:brightness(0) invert(1);opacity:0.85;"></div>
@@ -370,9 +402,22 @@
     }
   });
 
+  var endModal = document.getElementById('end-modal');
+  document.getElementById('end-modal-cta').href = C.CALENDAR_URL;
+  document.getElementById('end-modal-cta').addEventListener('click', function () {
+    E.trackMilestone('call_cta_clicked', session, { placement: 'end-popup' });
+    endModal.classList.remove('visible');
+    showEnded();
+  });
+  document.getElementById('end-modal-later').addEventListener('click', function () {
+    endModal.classList.remove('visible');
+    showEnded();
+  });
+
   video.addEventListener('ended', function () {
     fireOnce('watch_completed');
-    showEnded();
+    fireOnce('end_popup_shown');
+    endModal.classList.add('visible');
   });
 
   // A broken/unsupported VIDEO_URL must never be a silent black box.

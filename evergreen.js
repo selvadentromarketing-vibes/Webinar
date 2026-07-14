@@ -131,7 +131,9 @@ window.EVERGREEN = (function () {
   function currentSession() {
     var p = new URLSearchParams(location.search).get('s');
     var epoch = p ? parseInt(p, 10) : (loadRegistration() || {}).epoch;
-    return epoch && !isNaN(epoch) ? new Date(epoch) : null;
+    if (!epoch || isNaN(epoch)) return null;
+    var d = new Date(epoch);
+    return isNaN(d.getTime()) ? null : d;
   }
 
   // .ics calendar file (UTC times), downloaded client-side.
@@ -162,12 +164,14 @@ window.EVERGREEN = (function () {
 
   function trackMilestone(event, session, extra) {
     var reg = loadRegistration() || {};
+    var valid = session && !isNaN(session.getTime());
     var payload = Object.assign({
       webinar_event: event,
       email: reg.email || '',
       first_name: reg.first_name || '',
-      webinar_session_epoch: session ? session.getTime() : null,
-      webinar_session_iso: session ? isoLocal(session) : null,
+      webinar_session_epoch: valid ? session.getTime() : null,
+      webinar_session_iso: valid ? isoLocal(session) : null,
+      webinar_session_utc: valid ? session.toISOString() : null,
     }, extra || {});
     if (window.posthog && posthog.capture) posthog.capture('webinar_' + event, payload);
     if (CONFIG.MILESTONE_WEBHOOK_URL) {

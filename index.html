@@ -833,6 +833,9 @@ fbq('track', 'PageView');
     data.webinar_date_formatted = E.fmtFull(selectedSession);
     data.webinar_session_epoch = selectedSession.getTime();
     data.webinar_session_iso = E.isoLocal(selectedSession);
+    // Unambiguous instant for GHL date fields / wait-until steps —
+    // the naive local ISO above would be misread in the location's TZ.
+    data.webinar_session_utc = selectedSession.toISOString();
     data.watch_url = E.watchUrl(selectedSession.getTime());
     data.visitor_timezone = (Intl.DateTimeFormat().resolvedOptions().timeZone) || '';
 
