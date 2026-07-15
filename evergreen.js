@@ -34,7 +34,7 @@ window.EVERGREEN = (function () {
     // Watch-room milestone events (empty string = PostHog only).
     MILESTONE_WEBHOOK_URL: '',
     // Booking CTA shown at the offer reveal.
-    CALENDAR_URL: 'https://api.leadconnectorhq.com/widget/booking/jL5tqW1PsFp98HZOafHO',
+    CALENDAR_URL: 'https://api.leadconnectorhq.com/widget/booking/12wcUVBlbJPR9dlLOrEY',
 
     WATCH_PATH: '/watch.html',
     THANK_YOU_PATH: '/thank-you.html',
