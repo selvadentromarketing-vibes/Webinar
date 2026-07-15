@@ -60,6 +60,15 @@ export default async () => {
         continue;
       }
 
+      // Step was already due when they registered (express slots — e.g. a
+      // "starts in 15 min" session): a "1 hour before" email would be
+      // nonsense, so skip it rather than send it late.
+      if (rec.created_at && due < rec.created_at) {
+        rec.sent[step.key] = 'skipped-registered-after';
+        dirty = true;
+        continue;
+      }
+
       try {
         const r = await fetch(HOOKS[step.key], {
           method: 'POST',
