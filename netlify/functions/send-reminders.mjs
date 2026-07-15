@@ -20,9 +20,12 @@
 import { getStore } from '@netlify/blobs';
 
 const HOOKS = {
-  reminder_1h: process.env.HOOK_REMINDER_1H || '', // TODO: paste GHL inbound webhook URL
-  live_now:    process.env.HOOK_LIVE_NOW    || '', // TODO: paste GHL inbound webhook URL
-  followup_2h: process.env.HOOK_FOLLOWUP_2H || '', // TODO: paste GHL inbound webhook URL
+  reminder_1h: process.env.HOOK_REMINDER_1H ||
+    'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/2e0e4751-ba95-47af-8a4e-e7a6c068cded',
+  live_now:    process.env.HOOK_LIVE_NOW ||
+    'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/26f9097d-32e8-452e-9226-11c4b8a9a480',
+  followup_2h: process.env.HOOK_FOLLOWUP_2H ||
+    'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/52aace29-3258-4bc4-afac-61207c41b775',
 };
 
 const STEPS = [

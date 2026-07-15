@@ -13,9 +13,11 @@ window.EVERGREEN = (function () {
     // ── Video ────────────────────────────────────────────────────
     // PLACEHOLDER — swap for the final recording before launch.
     // Recommended: Bunny Stream mp4/HLS URL (signed, no branding).
+    // "Webinar ENG V2" — 45m36s. PLACEHOLDER URL until the compressed file
+    // is uploaded to GHL Media Storage; swap for the filesafe CDN URL.
     VIDEO_URL: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-    VIDEO_DURATION_SEC: 2700,   // 45 min — set to the real recording length
-    OFFER_AT_SEC: 1800,         // minute 30 — when the CTA panel reveals
+    VIDEO_DURATION_SEC: 2736,   // exact length of Webinar ENG V2
+    OFFER_AT_SEC: 1800,         // minute 30 — set to the real pitch timestamp
 
     // ── Session schedule (visitor-local times) ───────────────────
     DAILY_HOURS: [11, 19],      // sessions every day at 11:00 and 19:00
