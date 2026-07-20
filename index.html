@@ -12,18 +12,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Lexend:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-<!-- Facebook Pixel — Replace YOUR_PIXEL_ID -->
-<!--
+<!-- Meta Pixel Code -->
 <script>
 !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
 n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
 n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
 t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
 document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', 'YOUR_PIXEL_ID');
+fbq('init', '680727997874671');
 fbq('track', 'PageView');
 </script>
--->
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -896,13 +898,10 @@ fbq('track', 'PageView');
     .then(function(response) {
       if (!response.ok) throw new Error('Network response was not ok');
       
-      // Fire Facebook Pixel Lead event
-      if (typeof fbq === 'function') {
-        fbq('track', 'Lead', {
-          content_name: 'Webinar Registration',
-          content_category: 'Selvadentro Webinar'
-        });
-      }
+      // Meta Lead fires ONCE on the thank-you page (per EPPC's
+      // instructions). This flag is how thank-you knows the arrival is a
+      // fresh submission and not a revisit from an email link.
+      try { sessionStorage.setItem('slvd_just_registered', '1'); } catch (e) {}
       
       // Remember the registration for the thank-you + watch pages
       E.saveRegistration({
