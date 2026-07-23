@@ -500,7 +500,7 @@ src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"
 <script>
 (function () {
   var CFG = {
-    webhookUrl: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/66899e27-0198-48ce-b1c8-4e10d86e4315',
+    webhookUrl: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/426b14da-d654-4c97-b4e3-d2ac32626e3a',
     videoElementId: 'player'
   };
 
@@ -513,20 +513,31 @@ src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"
   if (!video) { console.warn('[webinar-tracker] No encontré el video #' + CFG.videoElementId); return; }
 
   var lastExitSent = 0;
+  // Minuto de la sesión en el que el lead hizo Join — se congela al primer
+  // play. evergreen.js hace seek al offset de la sesión antes de reproducir,
+  // así que `currentTime` en ese momento = cuán tarde llegó.
+  var startMinute = null;
+  video.addEventListener('play', function () {
+    if (startMinute === null) startMinute = Math.floor((video.currentTime || 0) / 60);
+  }, { once: true });
 
   function send() {
     var t = video.currentTime || 0, dur = video.duration || 0;
-    var payload = JSON.stringify({
+    var payload = {
       contact_id: cid,        // GHL empareja el contacto con esta llave
       cid: cid,
       webinar_exit_minute: Math.floor(t / 60),
       webinar_watched_percent: dur ? Math.round((t / dur) * 100) : 0
-    });
+    };
+    // Solo lo mandamos si de verdad hicieron play — evita sobrescribir un
+    // valor guardado con null si el visitor cierra sin darle Join.
+    if (startMinute !== null) payload.webinar_start_time = startMinute;
+    var body = JSON.stringify(payload);
     try {
       if (navigator.sendBeacon) {
-        navigator.sendBeacon(CFG.webhookUrl, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
+        navigator.sendBeacon(CFG.webhookUrl, new Blob([body], { type: 'text/plain;charset=UTF-8' }));
       } else {
-        fetch(CFG.webhookUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: payload, keepalive: true });
+        fetch(CFG.webhookUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: body, keepalive: true });
       }
     } catch (e) { console.warn('[webinar-tracker] fallo al enviar', e); }
   }
