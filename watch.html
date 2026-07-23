@@ -490,5 +490,64 @@ src="https://www.facebook.com/tr?id=680727997874671&ev=PageView&noscript=1"
 })();
 </script>
 
+<!-- ============================================================================
+     WEBINAR TRACKER · Selvadentro
+     Envía 3 eventos (play/completed/exit) al inbound webhook de GHL,
+     matcheando el contacto por ?cid={{contact.id}} en el link del email.
+     Independiente del tracker de milestones de evergreen.js (que solo va a
+     PostHog) para evitar duplicar ejecuciones de workflows en GHL.
+     ============================================================================ -->
+<script>
+(function () {
+  var CFG = {
+    webhookUrl: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/66899e27-0198-48ce-b1c8-4e10d86e4315',
+    videoElementId: 'player'
+  };
+
+  // --- Identificar al lead (viene en el link: ?cid={{contact.id}}) ---
+  var params = new URLSearchParams(window.location.search);
+  var cid = params.get('cid') || sessionStorage.getItem('wb_cid') || 'anon';
+  if (cid !== 'anon') sessionStorage.setItem('wb_cid', cid);
+
+  var video = document.getElementById(CFG.videoElementId);
+  if (!video) { console.warn('[webinar-tracker] No encontré el video #' + CFG.videoElementId); return; }
+
+  var lastExitSent = 0;
+
+  function send() {
+    var t = video.currentTime || 0, dur = video.duration || 0;
+    var payload = JSON.stringify({
+      contact_id: cid,        // GHL empareja el contacto con esta llave
+      cid: cid,
+      webinar_exit_minute: Math.floor(t / 60),
+      webinar_watched_percent: dur ? Math.round((t / dur) * 100) : 0
+    });
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(CFG.webhookUrl, new Blob([payload], { type: 'text/plain;charset=UTF-8' }));
+      } else {
+        fetch(CFG.webhookUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: payload, keepalive: true });
+      }
+    } catch (e) { console.warn('[webinar-tracker] fallo al enviar', e); }
+  }
+
+  // Vio el video completo — garantiza que el registro final sea 100%.
+  video.addEventListener('ended', function () { send(); });
+
+  // Salida: throttle de 15s para no disparar ejecuciones de GHL de más
+  function sendExit() {
+    var now = Date.now();
+    if (now - lastExitSent < 15000) return;
+    lastExitSent = now;
+    send();
+  }
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'hidden') sendExit();
+  });
+  // Cierre real de la página: siempre manda la última posición
+  window.addEventListener('pagehide', function () { send(); });
+})();
+</script>
+
 </body>
 </html>

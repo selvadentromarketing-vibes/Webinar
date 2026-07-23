@@ -32,6 +32,10 @@ window.EVERGREEN = (function () {
     // visitor_timezone for reminder emails.
     WEBHOOK_URL: 'https://services.leadconnectorhq.com/hooks/crN2IhAuOBAl7D8324yI/webhook-trigger/5be1a789-e3d2-4621-b5b3-c1df0da44469',
     // Watch-room milestone events (empty string = PostHog only).
+    // NOTE: watch.html has an independent 3-event tracker (play/completed/exit)
+    // that pushes to a dedicated GHL inbound webhook — see the block before
+    // </body> in watch.html. Keeping this empty avoids duplicate GHL workflow
+    // executions.
     MILESTONE_WEBHOOK_URL: '',
     // Booking CTA shown at the offer reveal.
     CALENDAR_URL: 'https://api.leadconnectorhq.com/widget/booking/12wcUVBlbJPR9dlLOrEY',
